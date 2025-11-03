@@ -36,6 +36,9 @@ will cause the app to error out so ensure port 4000 is free before starting the 
 - The server only listens on 4000 port as specified in the requirements rather than having it be configurable and passed 
   at runtime.
 
+- Printing to standard output the report of change made it impossible to unit test that functionality, so that was manually tested
+  rather than automated.
+
 - For simplicity’s sake using the Standard output for logging, since a requirement was to log a report of change using the 
   standard output I just extended it to be used at all times.
 
