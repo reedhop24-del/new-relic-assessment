@@ -20,12 +20,15 @@ Then the shutdown test suite under:
 Tests must be run in that order because the shutdown test shuts down the server.
 
 ### Assumptions
-- The problem description did not specify how when there are 5 connected clients, what is the expected behavior of the 6th client, 
-  rather than reject that client will be queued by the executor service when a thread is available. The client is not necessarily 
-  aware that they are waiting and may time out, though I thought this was a better behavior than rejecting the client.
+- The problem description did not specify when there are 5 connected clients, what is the expected behavior of the 6th client. 
+  Rather than reject that client, the client will be queued by the executor service when a thread is available. The client is not 
+  necessarily aware that they are waiting and may time out, though I thought this was better behavior than rejecting the client.
 
-- Input that does not have a terminating new line character is ignored and the connection remains open rather than input that 
-  is invalid (non integer chars or length greater than 9) in which case the connection is closed.
+- Input that does not have a terminating new line character is ignored and the connection remains open. In contrast, input that 
+  is invalid (non integer chars or length greater than 9) the connection is closed.
+
+- When a termination message is received from the client, the server closes all client connections and does a clean shutdown 
+  meaning it shuts down and gracefully, handles any exceptions, and closes all resources it had open.
 
 - Unique numbers are stored only in memory during runtime, they are not reloaded from disk if the server restarts.
 
