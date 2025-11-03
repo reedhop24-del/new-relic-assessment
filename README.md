@@ -17,7 +17,8 @@ Then the shutdown test suite under:
 
 `mvn -Dtest=ShutdownTest test`
 
-Tests must be run in that order because the shutdown test shuts down the server.
+Tests must be run in that order because the shutdown test shuts down the server. Any other process running on port 4000 
+will cause the app to error out so ensure port 4000 is free before starting the server.
 
 ### Assumptions
 - The problem description did not specify when there are 5 connected clients, what is the expected behavior of the 6th client. 
@@ -31,6 +32,9 @@ Tests must be run in that order because the shutdown test shuts down the server.
   meaning it shuts down and gracefully, handles any exceptions, and closes all resources it had open.
 
 - Unique numbers are stored only in memory during runtime, they are not reloaded from disk if the server restarts.
+
+- The server only listens on 4000 port as specified in the requirements rather than having it be configurable and passed 
+  at runtime.
 
 - For simplicity’s sake using the Standard output for logging, since a requirement was to log a report of change using the 
   standard output I just extended it to be used at all times.
